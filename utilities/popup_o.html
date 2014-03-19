@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Sipiko browser телефон :: Настройки</title>
+
+    <!-- include the Tools -->
+  <script src="jquery.tools.min.js"></script>
+    <script src="popup.js"></script>
+  <link rel="stylesheet" href="option.css" type="text/css" media="screen" />
+
+</head>
+<body>
+<div align="center" style="width: 301px;" id="content">
+<ul class="tabs">
+	<li><a href="#">Состояние</a></li>
+	<li><a href="#">Настройки</a></li>
+	<li><a href="#">Руководство</a></li>
+</ul>
+
+<!-- tab "panes" -->
+
+<div class="panes">
+	<div>
+		<table align="center" width="98%"  border="0">
+				<tr>
+	<td><span>Статус микрофона</span></td>
+	<td width="10px"></td>
+	<td><span id="micro">Запрещён &nbsp&nbsp<img src="camera.png" style="vertical-align: middle" /></span>
+	
+</td>
+</tr>
+<tr>
+	<td><span>Tелефон:</span><br />
+	
+	</td>
+	<td width="10px" id="turntel_check" width="10px"></td>
+	<td id="tel_status"><span id="tel_statusis">
+		
+		<label for="radio1_A">Включить:&nbsp&nbsp</label> <input type="radio" name="radio1"  id="radio1_A" value=Включен checked="" ><br />
+		<label for="radio1_B">Выключить:</label> <input type="radio" name="radio1"  id="radio1_B" value=Выключен checked="" />
+	<span></td>
+</tr>
+<tr>
+	<td><span>Статус телефона</span></td>
+	<td width="10px" id="stat_teltd"></td>
+	<td><span id="turntel">Выключен</span>
+	
+</td>
+</tr>
+<tr>
+	<td><span>Статус регистрации</span></td>
+		<td></td>
+	<td><span id="reg_status">Неопределен</span></td>
+</tr>
+<tr>
+	<td><span>Звонки с кнопки имя:</span></td>
+		<td></td>
+	<td><span id="bt_name"></span></td>
+</tr>
+<tr>
+	<td>Звонки с кнопки ID</span></td>
+		<td></td>
+	<td><span id="bt_id"></span>
+	</td>
+</tr>
+<tr>
+	<td>Кол-во кнопок</span></td>
+		<td></td>
+	<td><span id="bt_num"></span>
+	</td>
+</tr>
+<tr>
+	<td><span>Принимать с кнопки ID</span></td>
+			<td></td>
+	<td>
+	<select id="sip_acc">
+</select>
+</td>
+</tr>
+
+
+</table>
+
+	</div>
+	<div align="left">
+
+&nbsp;&nbsp;Громкость звонка<br />
+<input type="range" name="points" min="1" max="10" id="vol_range" value ="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<textarea rows="1" cols="2" id="carr_range">
+10
+</textarea>
+<br /> 
+<input type="checkbox" value="1" align="LEFT" checked="checked" /> Телефон включен<br />
+<input type="checkbox" value="1" align="LEFT" /> Оповещения о входящем звонке<br />
+<input type="checkbox" value="1" align="LEFT" checked="checked" /> Оповещения о выключении телефона<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<strong><span id="alert_busines">&nbsp</span></strong>
+<p id="business_tar" style="opacity:0.6;">
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>Тариф бизнес:</strong><br />
+<input type="checkbox" value="1" align="LEFT"  /> Текстовый чат<br />
+<input type="checkbox" value="2" align="LEFT"  /> Видео чат<br />
+<input type="checkbox" value="3" align="LEFT"  /> Улуга Call Back<br />
+<input type="checkbox" value="1" align="LEFT"  /> Оповещения о пропущенном звонке<br />
+<input type="checkbox" value="1" align="LEFT"  /> Записная книжка<br />
+<input type="checkbox" value="1" align="LEFT"  /> Нежелательные входящие номера<br />
+<input type="checkbox" value="1" align="LEFT"  /> Переадресация вызова на тел. номер<br />&nbsp;&nbsp;&nbsp;&nbsp;      <input id="phone" type="tel" /> <br />
+<input type="checkbox" value="1" align="LEFT"  /> Автоответчик<br />
+<input type="checkbox" value="1" align="LEFT"  /> Карточка клиента<br />
+<input type="checkbox" value="1" align="LEFT"  /> Статистика входящих звонков<br />
+<input type="checkbox" value="1" align="LEFT"  /> Статистика исходящих звонков<br />
+<input type="checkbox" value="1" align="LEFT"  /> Запись разговоров<br />
+<input type="checkbox" value="1" align="LEFT"  /> Голосовая почта<br />
+<input type="checkbox" value="1" align="LEFT"  /> Список номеров для автообзвона<br />
+<input type="checkbox" value="1" align="LEFT"  /> 1С бухгалтерия интерфейс<br />
+</p>
+</div>
+	
+
+	<div>Пользоваться просто: нажал на кнопку - и говори.</div>
+</div>
+</div>
+
+</body>
+</html>

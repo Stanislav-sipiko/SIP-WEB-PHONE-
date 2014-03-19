@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>sipML5 C2C</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="SIPml-api.js" type="text/javascript"></script>
+	<style>
+		.btn_init {
+			background-color: yellow;
+			color:		black;
+		}
+		.btn_connected {
+			background-color: green;
+			color:		white;
+		}
+		.btn_hangup {
+			background-color: red;
+			color:		white;
+		}
+		
+	</style>
+</head>
+<body>
+<button style="margin-top:20px" onclick="accept_incall();">Accept</button>
+<button style="margin-top:20px" onclick="hangup_incall();">Hangup</button>
+
+
+
+
+<script>
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+var constraints = {audio: true, video: false};
+
+
+function successCallback(stream) {
+  console.log("navigator.getUserMedia good ");
+}
+function errorCallback(error){
+  console.log("navigator.getUserMedia error: ", error);
+}
+
+navigator.getUserMedia(constraints, successCallback, errorCallback);
+
+	var sipStack;
+	var registerSession;
+	var callSession;
+	    audio_remote = document.createElement('audio');
+    audio_remote.autoplay = "autoplay";
+    audio_ringbacktone = document.createElement('audio');
+    audio_ringbacktone.src = "ringtone.wav";
+    audio_ringbacktone.loop = true;
+	
+	 function playaudio(){
+		audio_ringbacktone.play();
+	}
+	function stopaudio(){
+		audio_ringbacktone.pause();
+	}
+	
+	var errorCallback = function(e){
+		console.error('Failed to initialize the engine: ' + e.message);
+	}
+	
+	var readyCallback = function(e) {
+		sipStack = new SIPml.Stack({
+				realm: 'asterisk', // mandatory: domain name
+				impi: 'cb20', // mandatory: authorization name (IMS Private Identity)
+				impu: 'sip:cb20@callme.sipiko.net', // mandatory: valid SIP Uri (IMS Public Identity)
+				password: 'raw2xk59og', // optional
+				display_name: '', // optional
+				websocket_proxy_url: 'ws://webrtc.sipiko.net:10060', // optional
+				outbound_proxy_url: 'udp://callme.sipiko.net:5060', // optional
+				enable_rtcweb_breaker: true, // optional
+				ice_servers: [{ url: 'stun:stun.l.google.com:19302'}],
+				enable_click2call: false,
+				//enable_early_ims: true,
+				events_listener: { events: '*', listener: sipStackEventsListener },
+				sip_headers: [ // optional
+						{ name: 'User-Agent', value: 'IM-client/OMA1.0 sipML5-v1.0.0.0' },
+						{ name: 'Organization', value: 'Sipiko' }
+				]
+			}
+		);
+		sipStack.start();
+	};
+	
+
+	function sipStackEventsListener(e){
+		console.log('-----sipStackEvents===============' + e.type);
+		if(e.type == 'started'){
+			login();
+		}		
+		else if(e.type == 'i_new_call'){ // incoming audio/video call
+			callSession = e.newSession;
+			playaudio();
+		}
+	}
+	
+	SIPml.init(readyCallback, errorCallback);
+	
+	
+
+	function sessionEventsListener (e){	
+		console.log('-----sessionEvents===============' + e.type);
+	}
+	function login(){
+		//try {
+			// LogIn (REGISTER) as soon as the stack finish starting
+
+			registerSession = sipStack.newSession('register', {
+				expires: 200,
+				events_listener: { events: '*', listener: sessionEventsListener },
+				sip_caps: [
+							{ name: '+g.oma.sip-im', value: null },
+							{ name: '+audio', value: null },
+							{ name: 'language', value: '\"en,fr\"' }
+					]
+			});
+			registerSession.register();
+		//}
+	}
+
+	
+	
+	function hangup_incall() {
+		stopaudio();
+		callSession.hangup({events_listener: { events: '*', listener: sessionEventsListener }});	
+	}	
+	
+
+  	function accept_incall() {
+		stopaudio();
+		callSession.accept( {events_listener: { events: '*', listener: sessionEventsListener }});
+
+	}	
+
+
+
+
+</script>
+
+<audio id="audio_remote" autoplay="autoplay" />
+
+</body>

@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Sipiko browser телефон :: Настройки</title>
+
+    <!-- include the Tools -->
+  <script src="jquery.tools.min.js"></script>
+    <script src="popup.js"></script>
+  <link rel="stylesheet" href="option.css" type="text/css" media="screen" />
+
+</head>
+<body>
+<div align="center" style="width: 301px;">
+<ul class="tabs">
+	<li><a href="#">Настройки</a></li>
+	<li><a href="#">Кабинет</a></li>
+	<li><a href="#">Руководство</a></li>
+</ul>
+
+<!-- tab "panes" -->
+<div class="onoff">
+Tелефон:</div>
+<div class="onoff">
+<div class="onoffswitch" >
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <div class="onoffswitch-inner"></div>
+        <div class="onoffswitch-switch"></div>
+    </label>
+</div></div>
+<div class="panes">
+	<div><input type="button" value="Расширенные настройки" id="bt_options" align="center"  />
+		<table align="center" width="98%"  border="0">
+		<tr>
+	<td><span>Статус интернета</span></td>
+		<td id="inet_statusi">&nbsp</td>
+	<td><span id="inet_status">Определяем...</span></td>
+</tr>
+		<tr>
+	<td><span>Статус микрофона</span></td>
+	<td width="10px" id="statmic_td"></td>
+	<td><span id="micro">Запрещён &nbsp&nbsp<img src="camera.png" style="vertical-align: middle" /></span>
+	
+</td>
+</tr>
+
+<tr>
+	<td><span>Статус телефона</span></td>
+	<td width="10px" id="turntel_check"></td>
+	<td><span id="turntel">Выключен</span>
+	
+</td>
+</tr>
+<tr>
+	<td><span>Статус регистрации</span></td>
+		<td></td>
+	<td><span id="reg_status">Неопределен</span></td>
+</tr>
+<tr>
+	<td><span>Имя кнопки :</span></td>
+		<td></td>
+	<td><span id="bt_name"></span></td>
+</tr>
+<tr>
+	<td><span>ID кнопки </span></td>
+		<td></td>
+	<td><span id="bt_id"></span>
+	</td>
+</tr>
+<tr>
+	<td><span>Кол-во кнопок</span></td>
+		<td></td>
+	<td><span id="bt_num"></span>
+	</td>
+</tr>
+<tr>
+	<td>
+<span>Выбрать кнопку:</span>
+</td>
+<td></td>
+<td><input type="button" value="Обновить" id="bt_refresh_id" align="center"  /></td>
+</tr>
+<tr>
+	<td colspan="3">
+	<select id="sip_acc">
+</select>
+</td>
+</tr>
+<tr>
+	<td colspan="2">Громкость звонка<br />
+<input type="range" name="points" min="0" max="1" id="vol_range" value ="1" step="0.1">
+</td>
+<td valign="bottom"><textarea rows="1" cols="3" id="carr_range" >
+1
+</textarea></td>
+</tr>
+<tr>
+	<td><span>Выключить звонок</span></td>
+		<td></td>
+	<td>
+	<input type="checkbox"  align="LEFT"  name="val_off"  id="bt_voloff" value="0"  />
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+<input type="button" value="Сохранить данные" id="bt_refresh" align="center"  />
+</td>
+</tr>
+
+</table>
+
+	</div>
+	<div align="left">
+	Кабинет с настройками кнопки и принимающего телефона <a href="http://callme.sipiko.net/client/">здесь</a>.<br /><br />
+	Сервис состоит из двух частей: клиент и оператор.<br /><br />
+	Клиент инициирует звонок, оператор принимает звонок.<br /><br />
+	Клиент - кнопка "Звонок с сайта"<br />
+	Оператор - WEB телефон<br />
+
+
+<!--
+<input type="checkbox" value="1" align="LEFT" /> Оповещения о входящем звонке<br />
+<input type="checkbox" value="1" align="LEFT" checked="checked" /> Оповещения о выключении телефона<br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;<strong><span id="alert_busines">&nbsp</span></strong>
+<p id="business_tar" style="opacity:0.6;" bgcolor="#E0E0E0">
+&nbsp;&nbsp;&nbsp;&nbsp; <strong>Тариф бизнес:</strong><br />
+<input type="checkbox" value="1" align="LEFT"  /> Текстовый чат<br />
+<input type="checkbox" value="2" align="LEFT"  /> Видео чат<br />
+<input type="checkbox" value="3" align="LEFT"  /> Улуга Call Back<br />
+<input type="checkbox" value="1" align="LEFT"  /> Оповещения о пропущенном звонке<br />
+<input type="checkbox" value="1" align="LEFT"  /> Записная книжка<br />
+<input type="checkbox" value="1" align="LEFT"  /> Нежелательные входящие номера<br />
+<input type="checkbox" value="1" align="LEFT"  /> Переадресация вызова на тел. номер<br />&nbsp;&nbsp;&nbsp;&nbsp;      <input id="phone" type="tel" /> <br />
+<input type="checkbox" value="1" align="LEFT"  /> Автоответчик<br />
+<input type="checkbox" value="1" align="LEFT"  /> Карточка клиента<br />
+<input type="checkbox" value="1" align="LEFT"  /> Статистика входящих звонков<br />
+<input type="checkbox" value="1" align="LEFT"  /> Статистика исходящих звонков<br />
+<input type="checkbox" value="1" align="LEFT"  /> Запись разговоров<br />
+<input type="checkbox" value="1" align="LEFT"  /> Голосовая почта<br />
+<input type="checkbox" value="1" align="LEFT"  /> Список номеров для автообзвона<br />
+<input type="checkbox" value="1" align="LEFT"  /> 1С бухгалтерия интерфейс<br />
+</p>
+-->
+</div>
+	
+
+	<div>
+		Эту страницу можно всегда вызвать кликнув на иконку &nbsp;&nbsp;<img src="phone19.png" style="vertical-align: middle" /> в правом вернем углу Chrome<br />
+	<br />
+	<span>Основная парадигма WebPhone принимать звонки с <a href="http://sipiko.net">кнопки</a>.<br />
+	WebPhone - это встроенный в браузер SIP телефон позволяющий принимать и отправлять звонки на SIP, фиксированные и мобильные номера.
+	</span>
+	<div id="helper" style="margin-right: 70px; padding: 5px; height: auto; border: inset 1px gray; ">
+	<h4>Необходимые условия для включения телефона:</h4>
+	<ul type="disc" >
+		<li>Микрофон разрешен</li>
+		<li>Телефон зарегистрирован</li>
+	</ul>
+	</div>
+	<!--
+<div id="helper" style="margin-right: 70px; padding: 5px; height: auto; border: inset 1px gray; ">
+	Разрешить микрофон: кликнуть на иконку &nbsp&nbsp
+	<img src="camera.png" style="vertical-align: middle" />&nbsp&nbsp в адресной строке Chrome<br/>
+	</div> 
+	-->
+	<hr style="margin-right: 70px"><p>
+	<strong>&nbsp&nbsp&nbsp Варианты применения WebPhone:</strong><br /><span id="serv_free"><strong>Бесплатно </strong><font size="1" style="text-decoration:underline"> подробнее...</font></span></p>
+	<div id="cont_free">
+		<ul type="disc" >
+		<li>Принимать звонки с кнопки "Callme" расположенной на вашем сайте<br/>
+			   Кнопка -> WebPhone</li>
+		<li>ТПринимать звонки с мобильных, стационарных, SIP телефонов<br/>
+			   GSM, PSTN, SIP -> WebPhone</li>
+				<li>Принимать звонки с мобильных без руоминга.<br />
+			   Необходимо переадресовать звонки со своего мобильного на наш номер (067, 050, 063)<br />
+			    GSM -> WebPhone</li>
+
+	</ul><hr style="margin-right: 70px"><p>
+	</div>
+	<span id="serv_pay"><strong>Платно </strong> <font size="1" style="text-decoration:underline">подробнее...</font></span>
+	</p><div id="cont_pay">
+		<ul type="disc" >
+		<li>Звонить на мобильные, стационарные, SIP телефоны</li>
+		<li>Пользоваться услугами колл-центра</li>
+	</ul>
+	<ul type="circle" style="margin-left: 40px">
+	<li>Карточка клиента</li>
+		<li> Статистика входящих звонков</li>
+			<li> Статистика исходящих звонков</li>
+				<li> Запись разговоров</li>
+					<li> Голосовая почта</li>
+						<li> 1С бухгалтерия интерфейс</li>
+					</ul>	
+	</div>
+	</div>
+</div>
+</div>
+
+</body>
+</html>

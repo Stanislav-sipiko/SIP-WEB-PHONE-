@@ -1,0 +1,5 @@
+ body {text-align:center; padding: 10px 10px; font-family:'Segoe UI', Tahoma, sans-serif; min-width: 357px;
+        overflow-x: hidden;} 
+    body > div { margin-bottom: 10px; } 
+ input[type="radio"] { margin-left: 0px; } 
+ span.pn { font-style: italic; font-size: 80%; }
